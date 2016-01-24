@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>k-minor</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .active a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+</head>
+<body ng-app="player">
+
+    <div ng-controller="PlayerController as player">
+        <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+            Sorry, your browser does not support HTML5 audio.
+        </audio>
+
+        <ul>
+            <li ng-class="{active: track == player.currentTrack}" ng-repeat="track in player.tracks"><a ng-click="player.playTrack(track)" href="">{{track.title}}</a></li>
+        </ul>
+    </div>
+
+<script type="text/javascript">
+    var app = angular.module("player", []);
+
+    app.controller('PlayerController', function ($element, $scope) {
+        var vm = this;
+        var audio = $element.find('audio')[0];
+
+        vm.tracks = [
+            {
+                title: 'Ravel - Bolero',
+                url: 'http://www.archive.org/download/bolero_69/Bolero.mp3'
+            },
+            {
+                title: 'Beethoven - Moonlight Sonata',
+                url: 'http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3'
+            },
+            {
+                title: 'Pachabel - Canon in D',
+                url: 'http://www.archive.org/download/CanonInD_261/CanoninD.mp3'
+            }
+        ];
+
+        vm.playTrack = function(track) {
+            vm.currentTrack = track;
+
+            audio.src = track.url;
+            audio.load();
+            audio.play();
+        };
+
+        vm.playTrack(vm.tracks[0]);
+
+        audio.addEventListener('ended', function () {
+            $scope.$apply(function () {
+                var tracks = vm.tracks;
+                var index = (tracks.indexOf(vm.currentTrack) + 1) % tracks.length;
+
+                vm.playTrack(tracks[index]);
+            });
+        });
+    });
+</script>
+</body>
+</html>
