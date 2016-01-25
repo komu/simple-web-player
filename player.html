@@ -4,39 +4,48 @@
     <title>k-minor</title>
     <meta charset="UTF-8">
     <style type="text/css">
-        tr.active {
-            background: #ccc;
+        td.icon {
+            width: 30px;
         }
-
-        tr.active a.play {
-            background: #ccc;
-            color: black;
-            text-decoration: none;
+        tr td.icon .fa {
+            display: none;
+        }
+        tr.active td.icon .fa {
+            display: inline-block;
         }
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body ng-app="player">
 
+<div class="container">
     <div ng-controller="PlayerController as player">
+        <div class="page-header">
+            <h1>{{player.title()}}</h1>
+        </div>
+
         <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
             Sorry, your browser does not support HTML5 audio.
         </audio>
 
-        <table cellspacing="0">
+        <table class="table">
             <tbody>
-                <tr ng-class="{active: track == player.currentTrack}" ng-repeat="track in player.tracks">
-                    <td><a class="play" ng-click="player.playTrack(track)" href="">{{track.title}}</a></td>
-                    <td><a href="{{track.url}}">mp3</a></td>
-                </tr>
+            <tr ng-repeat="track in player.tracks" ng-class="{active: track == player.currentTrack}">
+                <td class="icon"><i class="fa fa-refresh fa-spin"></i></td>
+                <td><a class="play" ng-click="player.playTrack(track)" href="">{{track.title}}</a></td>
+                <td><a ng-href="{{track.url}}" title="Download mp3"><i class="fa fa-download"></i></a></td>
+            </tr>
             </tbody>
         </table>
     </div>
+</div>
 
 <script type="text/javascript">
     var app = angular.module("player", []);
 
-    function track(title) {
+    function makeTrack(title) {
         return {
             title: title,
             url: 'http://komu.kapsi.fi/k-minor/' + title + ".mp3"
@@ -48,32 +57,32 @@
         var audio = $element.find('audio')[0];
 
         vm.tracks = [
-            track('Another day'),
-            track('Blibs'),
-            track('canada'),
-            track('Chilled'),
-            track('csb'),
-            track('Cthulhu'),
-            track('Gaza'),
-            track('Glitchy'),
-            track('Jaa-a'),
-            track('Jukola'),
-            track('Lines'),
-            track('Minding'),
-            track('Nineteen'),
-            track('One Note'),
-            track('over'),
-            track('Perfect Day'),
-            track('Rounds'),
-            track('sjh'),
-            track('Something Unknown'),
-            track('Song 1'),
-            track('Such luck'),
-            track('Tuesday'),
-            track('Zenny')
+            makeTrack('Another day'),
+            makeTrack('Blibs'),
+            makeTrack('canada'),
+            makeTrack('Chilled'),
+            makeTrack('csb'),
+            makeTrack('Cthulhu'),
+            makeTrack('Gaza'),
+            makeTrack('Glitchy'),
+            makeTrack('Jaa-a'),
+            makeTrack('Jukola'),
+            makeTrack('Lines'),
+            makeTrack('Minding'),
+            makeTrack('Nineteen'),
+            makeTrack('One Note'),
+            makeTrack('over'),
+            makeTrack('Perfect Day'),
+            makeTrack('Rounds'),
+            makeTrack('sjh'),
+            makeTrack('Something Unknown'),
+            makeTrack('Song 1'),
+            makeTrack('Such luck'),
+            makeTrack('Tuesday'),
+            makeTrack('Zenny')
         ];
 
-        vm.playTrack = function(track) {
+        vm.playTrack = function (track) {
             vm.currentTrack = track;
 
             audio.src = track.url;
@@ -81,7 +90,13 @@
             audio.play();
         };
 
-        vm.playTrack(vm.tracks[0]);
+        vm.title = function () {
+            if (vm.currentTrack) {
+                return "k-minor - " + vm.currentTrack.title;
+            } else {
+                return "k-minor";
+            }
+        };
 
         audio.addEventListener('ended', function () {
             $scope.$apply(function () {
