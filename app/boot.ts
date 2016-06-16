@@ -7,6 +7,7 @@ import 'angular-route';
 
 // Finally load our global styles
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 import './styles/default.scss';
 
 const app = angular.module("my-app", [

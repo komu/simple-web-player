@@ -1,1 +1,11 @@
 @import 'components';
+
+td.icon {
+  width: 30px;
+}
+tr td.icon .fa {
+  display: none;
+}
+tr.active td.icon .fa {
+  display: inline-block;
+}
