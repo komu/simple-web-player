@@ -1,0 +1,17 @@
+<div class="page-header">
+    <h1>{{player.title()}}</h1>
+</div>
+
+<audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+    Sorry, your browser does not support HTML5 audio.
+</audio>
+
+<table class="table">
+    <tbody>
+    <tr ng-class="{active: track == player.currentTrack}" ng-repeat="track in player.tracks">
+        <td class="icon"><i class="fa fa-refresh fa-spin"></i></td>
+        <td><a class="play" ng-click="player.playTrack(track)" href="">{{track.title}}</a></td>
+        <td><a href="{{track.url}}" title="Download mp3"><i class="fa fa-download"></i></a></td>
+    </tr>
+    </tbody>
+</table>
