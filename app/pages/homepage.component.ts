@@ -4,6 +4,7 @@ class HomepageController {
 
     playlist = [
         'Another day',
+        'ark',
         'Blibs',
         'canada',
         'Chilled',
