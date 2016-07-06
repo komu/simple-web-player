@@ -18,7 +18,7 @@ module.exports = new WebpackConfig().extend('./webpack.common-config.js').merge(
     ],
     devServer: {
         //port: 9090,
-        //publicPath: publicPath,
+        publicPath: '/k-minor/',
         contentBase: './app',
         hot: true,
         inline: true,
