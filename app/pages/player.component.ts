@@ -35,8 +35,6 @@ class PlayerController {
             if (track)
                 this.loadTrack(track);
         }
-
-        console.log("foo");
     }
 
     trackEnded() {
