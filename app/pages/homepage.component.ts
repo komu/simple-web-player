@@ -3,29 +3,29 @@ import module from './module';
 class HomepageController {
 
     playlist = [
-        'Another day',
         'ark',
         'Blibs',
         'canada',
         'Chilled',
         'csb',
         'Cthulhu',
-        'Gaza',
+//        'Gaza',
         'Glitchy',
         'Jaa-a',
         'Jukola',
         'Lines',
-        'Minding',
-        'Nineteen',
+//        'Minding',
+//        'Nineteen',
         'One Note',
+        'operator',
         'over',
         'Perfect Day',
-        'Rounds',
+//        'Rounds',
+        'se-tudo',
         'sjh',
-        'Something Unknown',
-        'Song 1',
+//        'Something Unknown',
+//        'Song 1',
         'Such luck',
-        'Tuesday',
         'Zenny'
     ];
 }
