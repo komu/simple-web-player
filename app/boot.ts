@@ -20,6 +20,7 @@ import { routeConfiguration } from './routes';
 app.config(routeConfiguration);
 app.config(['$locationProvider', (locationProvider: angular.ILocationProvider) => {
     locationProvider.html5Mode(true);
+    locationProvider.hashPrefix("!");
 }]);
 
 angular.bootstrap(document.body, ['my-app'], {strictDi: true});

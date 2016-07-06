@@ -1,7 +1,7 @@
 routeConfiguration.$inject = ['$routeProvider'];
 export function routeConfiguration($routeProvider: angular.route.IRouteProvider) {
     $routeProvider
-        .when('/', { template: '<homepage></homepage>'})
+        .when('/', { template: '<homepage></homepage>', reloadOnSearch: false})
         .otherwise( { template: '<not-found></not-found>'});
 }
 
